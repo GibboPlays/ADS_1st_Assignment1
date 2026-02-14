@@ -1,0 +1,6 @@
+Follow the next instructions:
+
+cd build
+cmake ..
+make
+./voxel_filtering.cpp

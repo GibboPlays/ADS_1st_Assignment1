@@ -1,0 +1,4 @@
+http://pointclouds.org/documentation/tutorials/cluster_extraction.html#cluster-extraction
+
+./cluster_extraction
+pcl_viewer cloud_cluster_0.pcd cloud_cluster_1.pcd cloud_cluster_3.pcd cloud_cluster_4.pcd
