@@ -90,7 +90,7 @@ main (int argc, char** argv)
         std::cerr << "PointCloud representing the planar component: " << cloud_segmented->width * cloud_segmented->height << " data points." << std::endl;
 
         std::stringstream ss;
-        ss << "/home/gibbo_plays/AutoSystem/1st part/1st Assignment/table_scene_lms400_plane_" << i << ".pcd";
+        ss << "table_scene_lms400_plane_" << i << ".pcd";
         writer.write<pcl::PointXYZ> (ss.str (), *cloud_segmented, false);
 
         // Here we will extract the plane from the original filtered point cloud
@@ -101,7 +101,7 @@ main (int argc, char** argv)
         i++;
     }
     std::stringstream ss2;
-    ss2 << "/home/gibbo_plays/AutoSystem/1st part/1st Assignment/table_scene_lms400_notable.pcd";
+    ss2 << "table_scene_lms400_notable.pcd";
     // We write the point cloud without the ground
     writer.write<pcl::PointXYZ> (ss2.str (), *cloud_filtered, false);
     return (0);

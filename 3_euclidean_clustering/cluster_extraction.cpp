@@ -14,12 +14,6 @@
 int 
 main (int argc, char** argv)
 {
-    //controllo parametri
-   if (argc < 2) {
-       std::cerr << "Uso: ./cluster_extraction <input.pcd>" << std::endl;
-       return -1;
-   }
-
     // Read in the cloud data
     pcl::PCDReader reader;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>), cloud_f (new pcl::PointCloud<pcl::PointXYZ>);
@@ -84,10 +78,10 @@ main (int argc, char** argv)
 
     //Set the spatial tolerance for new cluster candidates
     //If you take a very small value, it can happen that an actual object can be seen as multiple clusters. On the other hand, if you set the value too high, it could happen, that multiple objects are seen as one cluster
-    ec.setClusterTolerance (0.02); // 2cm
+    ec.setClusterTolerance (0.05); // 5cm
 
     //We impose that the clusters found must have at least setMinClusterSize() points and maximum setMaxClusterSize() points
-    ec.setMinClusterSize (100);
+    ec.setMinClusterSize (20);
     ec.setMaxClusterSize (25000);
     ec.setSearchMethod (tree);
     ec.setInputCloud (cloud_filtered);
@@ -115,7 +109,7 @@ main (int argc, char** argv)
 
         std::cout << "PointCloud representing the Cluster: " << cloud_cluster->size () << " data points." << std::endl;
         std::stringstream ss;
-        ss << "/home/gibbo_plays/AutoSystem/1st part/1st Assignment/cloud_cluster_" << j << ".pcd";
+        ss << "cloud_cluster_" << j << ".pcd";
         writer.write<pcl::PointXYZ> (ss.str (), *cloud_cluster, false); //*
         j++;
     }

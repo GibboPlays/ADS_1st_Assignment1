@@ -4,7 +4,7 @@
 #include <thread>
     
 int main (int argc,char **argv){
-
+    
     //controllo parametri
     if (argc < 2) {
         std::cerr << "Uso: ./pcl_reader file.pcd" << std::endl;

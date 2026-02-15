@@ -34,7 +34,7 @@ main (int argc, char** argv)
 
    pcl::PCDWriter writer;
    std::stringstream ss;
-   ss << "/home/gibbo_plays/AutoSystem/1st part/1st Assignment/cloud_filtered.pcd";
+   ss << "cloud_filtered.pcd";
    writer.write<pcl::PointXYZ> (ss.str (), *cloud_filtered, false); //*
 
    return (0);
