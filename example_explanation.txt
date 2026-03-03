@@ -1,0 +1,7 @@
+Utilizzando lo script python "cloud_generator.py" ho creato la nuvola "autostrada_test.pcd", 
+che rappresenta un autostrada a 3 corsie, dove abbiamo 4 veicoli (oltre noi) rappresentati come blocchi di punti, 
+in tutte e 4 le direzioni (avanti, destra, sinistra e dietro). Quella davanti a noi ha è a una distanza di 4m, 
+questo permette di testare il sistema che individua il caso di frenata automatica. 
+Mettendo come input la nuvola all'eseguibile "./pipeline_clustering", otteniamo 4 clusters, colorati in modi differenti,
+una di essere è colorata di rosso, che indica il pericolo di frenata imminente,
+che è appunto il cluster corrispondente alla macchina davanti a noi.

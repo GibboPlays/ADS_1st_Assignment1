@@ -89,7 +89,7 @@ main (int argc, char** argv)
    // Create the filtering object
    pcl::VoxelGrid<pcl::PointXYZ> sor;
    sor.setInputCloud (cloud);
-   sor.setLeafSize (0.02f, 0.02f, 0.02f); //this value defines how much the PC is filtered
+   sor.setLeafSize (0.01f, 0.01f, 0.01f); //this value defines how much the PC is filtered
    sor.filter (*cloud_filtered);
 
    std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
@@ -155,7 +155,7 @@ main (int argc, char** argv)
 
     std::vector<pcl::PointIndices> cluster_indices;
 
-    myEuclideanClustering(cloud_filtered, tree, 0.15, 100, 25000, cluster_indices);
+    myEuclideanClustering(cloud_filtered, tree, 0.5, 50, 25000, cluster_indices);
     /**
 
     Now we extracted the clusters out of our point cloud and saved the indices in cluster_indices. 
@@ -190,24 +190,21 @@ main (int argc, char** argv)
         //calcolo distanza euclidea dall'origine (veicolo)
         Eigen::Vector4f centroid;
         pcl::compute3DCentroid(*cloud_cluster, centroid);
-        float distance = std::sqrt(centroid[0]*centroid[0] + centroid[1]*centroid[1] + centroid[2]*centroid[2]);
-
-        std::cout << "Cluster [" << i << "] - Posizione: (" << centroid[0] << ", " << centroid[1] << ", " << centroid[2] << ") - Distanza: " << distance << "m" << std::endl;
 
         //confine pericolo (larghezza auto 2m + 1m di margine per lato)
         float road_width_threshold = 2.0;
 
         uint8_t r, g, b;
         //se ho il cluster davanti (x > 0) e a meno di 5 metri
-        if (centroid[0] > 0 && std::abs(centroid[1]) < road_width_threshold && distance < 5.0) {
+        if (minPt.x > 0 && minPt.x < 5.0 && std::abs(centroid[1]) < road_width_threshold) {
             r = 255; 
             g = 0; 
             b = 0;
-            std::cout << "FRENARE! Distanza sotto i" << distance << "m" << std::endl;
+            std::cout << "FRENARE! Distanza sotto i " << minPt.x << "m" << std::endl;
         } else {
             //colore casuale
-            r = rand() % 256; 
-            g = rand() % 256; 
+            r = rand() % 200; //per non avere il rosso puro
+            g = 100 + (rand() % 156); //per avere sempre un po' di verde che inquina
             b = rand() % 256;
         }
 
